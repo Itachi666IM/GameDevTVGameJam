@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class WeaponController : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class WeaponController : MonoBehaviour
     [SerializeField] bool CanAttack = true;
     [SerializeField] float BlockCooldown = 1.2f;
     [SerializeField] float AttackCooldown = 1.0f;
-
+    public AudioClip attackAudio;
+    public AudioClip blockAudio;
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GameObject.Find("SpawnManager").GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -18,6 +25,7 @@ public class WeaponController : MonoBehaviour
             if (CanBlock)
             {
                 ShieldBlock();
+                audioSource.PlayOneShot(blockAudio, 1.0f);
             }
 
         }
@@ -27,6 +35,7 @@ public class WeaponController : MonoBehaviour
             if(CanAttack)
             {
                 SpearAttack();
+                audioSource.PlayOneShot(attackAudio, 1.0f);
             }
         }
     }
