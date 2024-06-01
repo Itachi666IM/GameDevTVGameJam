@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
     public enum SpawnState {SPAWNING, COUNTING, WAITING};
+    public TextMeshProUGUI gameText;
 
     [System.Serializable]
     public class Wave
@@ -64,6 +66,7 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning Wave " + _wave.name);
+        gameText.text = _wave.name;
         state = SpawnState.SPAWNING;
         for(int i=0;i<_wave.count;i++)
         {
@@ -80,7 +83,6 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy(Transform _enemy)
     {
         //Spawn Enemy
-        Debug.Log("Spawning Enemy");
         Instantiate(_enemy, transform.position, transform.rotation);
     }
 
@@ -101,12 +103,14 @@ public class WaveSpawner : MonoBehaviour
     void WaveCompleted()
     {
         Debug.Log("Wave Completed");
+        gameText.text = "Wave Completed";
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
         if(nextWave+1>waves.Length-1)
         {
             Debug.Log("DEFEATED ALL ENEMIES");
+            gameText.text = "Defeated All enemies!";
             nextWave = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
