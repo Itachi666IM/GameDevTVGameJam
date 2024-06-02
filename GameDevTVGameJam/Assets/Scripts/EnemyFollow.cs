@@ -14,7 +14,10 @@ public class EnemyFollow : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
- 
+
+    //Attacking
+    bool alreadyAttacked = false;
+    [SerializeField] float timeBetweenAttacks = 2.0f;
 
     //States
     public float sightRange, attackRange;
@@ -73,8 +76,22 @@ public class EnemyFollow : MonoBehaviour
 
     private void AttackPlayer()
     {
+        enemy.SetDestination(transform.position);
         transform.LookAt(player.transform);
-        enemy.SetDestination(player.transform.position);
+
+        if(!alreadyAttacked)
+        {
+            //Attack code
+            Animator anim = GetComponent<Animator>();
+            anim.SetTrigger("Attack");
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
   
 }
