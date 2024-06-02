@@ -8,6 +8,7 @@ public class WaveSpawner : MonoBehaviour
 {
     public enum SpawnState {SPAWNING, COUNTING, WAITING};
     public TextMeshProUGUI gameText;
+    public GameObject gameOverPanel;
 
     [System.Serializable]
     public class Wave
@@ -112,11 +113,18 @@ public class WaveSpawner : MonoBehaviour
             Debug.Log("DEFEATED ALL ENEMIES");
             gameText.text = "Defeated All enemies!";
             nextWave = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Invoke("FinalPanel", 3);
+            
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
             nextWave++;
         }
+    }
+
+    void FinalPanel()
+    {
+        gameOverPanel.SetActive(true);
     }
 }
