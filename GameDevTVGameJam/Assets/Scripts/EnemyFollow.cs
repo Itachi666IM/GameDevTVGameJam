@@ -77,9 +77,10 @@ public class EnemyFollow : MonoBehaviour
     private void AttackPlayer()
     {
         enemy.SetDestination(transform.position);
-        transform.LookAt(player.transform);
+        //transform.LookAt(player.transform);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position),  2f * Time.deltaTime);
 
-        if(!alreadyAttacked)
+        if (!alreadyAttacked)
         {
             //Attack code
             Animator anim = GetComponent<Animator>();
