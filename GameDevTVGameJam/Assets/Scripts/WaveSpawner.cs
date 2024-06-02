@@ -13,7 +13,7 @@ public class WaveSpawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform enemy;
+        public GameObject enemy;
         public int count;
         public float spawnRate;
     }
@@ -70,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
         state = SpawnState.SPAWNING;
         for(int i=0;i<_wave.count;i++)
         {
-            SpawnEnemy(_wave.enemy);
+            SpawnEnemy(_wave.enemy.transform);
             yield return new WaitForSeconds(1f/_wave.spawnRate);
         }
         //Spawn
