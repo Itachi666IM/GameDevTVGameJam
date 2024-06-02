@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Boss : MonoBehaviour
 {
     private GameObject player;
+    private GameObject youDiedPanel;
     public NavMeshAgent boss;
     public int health = 5;
 
@@ -34,6 +35,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        youDiedPanel = GameObject.Find("You Died Panel");
     }
 
     // Update is called once per frame
@@ -124,6 +126,10 @@ public class Boss : MonoBehaviour
         if(other.gameObject.CompareTag("Weapon"))
         {
             GetHit();
+        }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            youDiedPanel.SetActive(true);
         }
     }
 

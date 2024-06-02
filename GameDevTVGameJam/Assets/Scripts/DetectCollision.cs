@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DetectCollision : MonoBehaviour
 {
+    private GameObject youDiedPanel;
     // Start is called before the first frame update
     void Start()
     {
-        
+        youDiedPanel = GameObject.Find("You Died Panel");
     }
 
     // Update is called once per frame
@@ -18,9 +19,15 @@ public class DetectCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Weapon"))
         {
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            youDiedPanel.SetActive(true);
+        }
+
     }
+
 }

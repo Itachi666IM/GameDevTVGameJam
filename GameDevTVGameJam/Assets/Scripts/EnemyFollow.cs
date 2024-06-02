@@ -82,8 +82,7 @@ public class EnemyFollow : MonoBehaviour
         if (!alreadyAttacked)
         {
             //Attack code
-            Animator anim = GetComponent<Animator>();
-            anim.SetTrigger("Attack");
+            enemy.SetDestination(player.transform.position);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
