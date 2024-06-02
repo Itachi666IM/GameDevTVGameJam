@@ -111,12 +111,12 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log("DEFEATED ALL ENEMIES");
             gameText.text = "Defeated All enemies!";
-            nextWave = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
         }
         else
         {
             nextWave++;
         }
     }
+
 }

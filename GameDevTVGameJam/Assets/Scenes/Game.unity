@@ -187,6 +187,10 @@ MonoBehaviour:
     enemy: {fileID: 2424599461561581298, guid: dd28ce53b0d73484db252ecba7f65570, type: 3}
     count: 16
     spawnRate: 2
+  - name: Defeat the Enemy King
+    enemy: {fileID: 5793695471462939123, guid: f92793fa6cefb144aac58be6e8e462e2, type: 3}
+    count: 1
+    spawnRate: 1
   timeBetweenWaves: 10
 --- !u!81 &726126
 AudioListener:
